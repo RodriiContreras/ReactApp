@@ -1,0 +1,21 @@
+{
+  "name": "srvgraphql",
+  "version": "1.0.0",
+  "description": "Base de datos con GraphQL",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "author": "Rodrigo Contreras",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^3.5.0",
+    "dotenv": "^10.0.0",
+    "graphql": "^16.2.0",
+    "mongoose": "^6.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
