@@ -13,10 +13,12 @@ const server = new ApolloServer({//CREO MI SERVER Y LE PASO SU QUERY Y RESOLVER
     typeDefs,
     resolvers,
     context: ( {req} ) =>{
+        console.log(req.headers);
          const autheader = req.headers['authorization']
          if(autheader){
              try {
-                 const usuario= jwt.verify(autheader,process.env.SECRETO)
+                 const usuario= jwt.verify(autheader.replace(`Bearer `,''),process.env.SECRETO)
+                 console.log(usuario)
                 return {usuario}
              } catch (error) {
                  console.log(error)

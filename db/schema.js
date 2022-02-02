@@ -34,15 +34,25 @@ const typeDefs= gql`
      id:ID
      pedido:[PedidoGrupo]
      total:Float
-     cliente:ID
+     cliente:Cliente
      vendedor:ID
      fecha:String
      estado:EstadoDeMiPedido
  }
  type PedidoGrupo{  
      id:ID
+     nombre:String
      cantidad:Int
  }
+ type TopCliente{
+     total:Float
+     cliente:[Cliente]
+}
+type TopVendedor{
+    total:Float
+    vendedor:[Usuario]
+}
+
 
    input UsuarioInput{
        nombre:String!
@@ -62,9 +72,11 @@ const typeDefs= gql`
        email:String!
        telefono:String   
    }
+
    
    type Query {
-       obtenerUsuario(token:String!):Usuario
+       obtenerUsuario:Usuario
+       obteniendoMejoresVendedor:[TopVendedor]
 
        obtenerProductos:[Producto]
 
@@ -73,6 +85,16 @@ const typeDefs= gql`
        obtenerClientes:[Cliente]
        obtenerCliente(id:ID!):Cliente
        obtenerClientesVendedor:[Cliente]
+       obteniendoMejoresClientes:[TopCliente]
+
+       obtenerPedidos:[Pedido]
+       obtenerPedidosVendedor:[Pedido]
+       obtenerPedido(id: ID!) : Pedido
+       obtenerPedidoEstado(estado:String!):[Pedido]
+
+
+       buscarProducto(texto:String!): [Producto]
+
 
 
    }
@@ -85,12 +107,14 @@ const typeDefs= gql`
    input PedidoProductoInput{
        id:ID
        cantidad:Int
+       nombre:String
+       precio:Float
    }
 
    input PedidoInput{
        pedido:[PedidoProductoInput]
-       total:Float!
-       cliente:ID!
+       total:Float
+       cliente:ID
        estado:EstadoDeMiPedido
    }
 
@@ -121,6 +145,9 @@ type Mutation{
 
     #pedidos
     nuevoPedido(input:PedidoInput) : Pedido 
+    actualizarPedido(id:ID!, input: PedidoInput) : Pedido
+    eliminarPedido(id:ID!):String 
+
 }
 `;
 
