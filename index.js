@@ -26,6 +26,6 @@ const server = new ApolloServer({//CREO MI SERVER Y LE PASO SU QUERY Y RESOLVER
          }
     }
 });
-server.listen().then(({url})=>{
+server.listen({port : process.env.PORT || 4000}).then(({url})=>{
     console.log(`servidor funcionando ${url}`)
 })
