@@ -181,7 +181,6 @@ const resolvers={
     if (!passwordCorrecto){
         throw new Error('La contraseña es incorrecta')
     }
-
     return{
         token:crearToken(existeUsuario,process.env.SECRETO,'24h')
     }
@@ -331,7 +330,7 @@ const resolvers={
     if(!clienteExiste){
         throw new Error('El cliente no existe');//PENDIENTE
     }
-    if (clienteExiste.vendedor.toString()  !== ctx.usuario.id){
+    if (clienteExiste.vendedor.toString() !== ctx.usuario.id){
         throw new Error('No eres el vendedor de este cliente')
     }
     if (input.pedido){
